@@ -2,17 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import { X, CheckCircle, AlertCircle, Info } from 'lucide-react';
+import React from 'react';
 
-interface ToastProps {
+export interface ToastProps {
   title: string;
   description?: string;
   type?: 'success' | 'error' | 'info';
   onClose: () => void;
 }
 
+export type ToastActionElement = React.ReactElement;
+
 export const Toast = ({ title, description, type = 'info', onClose }: ToastProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  
+
   useEffect(() => {
     setIsVisible(true);
     return () => setIsVisible(false);
@@ -54,7 +57,9 @@ export const Toast = ({ title, description, type = 'info', onClose }: ToastProps
             <div className="flex-shrink-0">{getIcon()}</div>
             <div className="ml-3">
               <p className="text-sm font-medium">{title}</p>
-              {description && <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{description}</p>}
+              {description && (
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{description}</p>
+              )}
             </div>
           </div>
           <button
